@@ -10,10 +10,6 @@ object Main {
         print(pascal(col, row) + "  ")
       println()
     }
-    //println(pascal(0,0))
-    //println("\n1,1",pascal(1,1))
-    //println(pascal(0,0))
-
   }
 
   /**  Exercise 1 */
@@ -40,13 +36,15 @@ object Main {
         balancedHelper(chars.tail,openCnt)
     }
 
-    if (chars.isEmpty)    true
-    else                  balancedHelper(chars, 0)
+    balancedHelper(chars, 0)
   }
 
-
-  /**
-   * Exercise 3
-   */
-  def countChange(money: Int, coins: List[Int]): Int = 20
+  /** Exercise 3 */
+  def countChange ( money: Int, coins: List[Int] ) : Int = {
+    if (money == 0)                           1
+    else if (money < 0)                       0
+    else if (coins.isEmpty && money >= 1)     0
+    else
+      countChange(money, coins.tail) + countChange( money-coins.head,coins )
+  }
 }
